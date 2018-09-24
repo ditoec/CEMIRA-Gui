@@ -1,7 +1,8 @@
 from PyQt5.QtCore import QProcess
 from PyQt5 import QtWidgets
 from control_panel_ui import Ui_MainWindow
-import time,subprocess
+import time
+import subprocess
 
 class MyWindow(QtWidgets.QMainWindow):
 
@@ -16,31 +17,75 @@ class MyWindow(QtWidgets.QMainWindow):
 
     def closeEvent(self,event):
         self.process = QProcess()
-        self.process.start('tmux', ['send-keys', '-t', 'cemira:head', 'C-c'])
+        self.process.start('tmux', ['send-keys', '-t', 'head', 'C-c'])
         self.process.waitForFinished()
         self.process.terminate()
-        self.process.start('tmux', ['send-keys', '-t', 'cemira:arm', 'C-c'])
+        self.process.start('tmux', ['send-keys', '-t', 'arm', 'C-c'])
         self.process.waitForFinished()
         self.process.terminate()
-
+        self.process.start('tmux', ['send-keys', '-t', 'faceOutput', 'C-c'])
+        self.process.waitForFinished()
+        self.process.terminate()
+        self.process.start('tmux', ['send-keys', '-t', 'object', 'C-c'])
+        self.process.waitForFinished()
+        self.process.terminate()
+        self.process.start('tmux', ['send-keys', '-t', 'faceInput', 'C-c'])
+        self.process.waitForFinished()
+        self.process.terminate()
+        self.process.start('tmux', ['send-keys', '-t', 'leap', 'C-c'])
+        self.process.waitForFinished()
+        self.process.terminate()
         self.processTerm.terminate()
+
+        self.process.start('tmux', ['send-keys', '-t', 'ros', 'C-c'])
+        self.process.waitForFinished()
+        self.process.terminate()
 
 def setupControlPanel(ui):
     #connect events
     ui.pushHead.clicked.connect(pushHeadClickedHandler)
     ui.pushArm.clicked.connect(pushArmClickedHandler)
+    ui.pushFaceOutput.clicked.connect(pushFaceOutputClickedHandler)
+    ui.pushObject.clicked.connect(pushObjectClickedHandler)
+    ui.pushFaceInput.clicked.connect(pushFaceInputClickedHandler)
+    ui.pushLeap.clicked.connect(pushLeapClickedHandler)
 
 def setupTmux():
     #setup tmux
-    subprocess.call(['tmux','kill-session', '-t', 'cemira'])
-    subprocess.call(['tmux','new', '-s', 'cemira','-n','head','-d'])
-    subprocess.call(['tmux','new-window', '-t', 'cemira','-n','arm','-d'])
+    subprocess.run(['tmux','kill-session','-t','ros'])
+    subprocess.run(['tmux','kill-session','-t','head'])
+    subprocess.run(['tmux','kill-session','-t','arm'])
+    subprocess.run(['tmux','kill-session','-t','faceOutput'])
+    subprocess.run(['tmux','kill-session','-t','object'])
+    subprocess.run(['tmux','kill-session','-t','faceInput'])
+    subprocess.run(['tmux','kill-session','-t','leap'])
+    
+    subprocess.run(['tmux','new', '-s', 'head','-d'],cwd="/home/dito")
+    subprocess.run(['tmux','new', '-s', 'arm','-d'],cwd="/home/dito")
+    subprocess.run(['tmux','new', '-s', 'faceOutput','-d'],cwd="/home/dito")
+    subprocess.run(['tmux','new', '-s', 'object','-d'],cwd="/home/dito")
+    subprocess.run(['tmux','new', '-s', 'faceInput','-d'],cwd="/home/dito")
+    subprocess.run(['tmux','new', '-s', 'leap','-d'],cwd="/home/dito")
+    
+    subprocess.run(['tmux', 'send-keys', '-t', 'ros', 'roscore', 'Enter'])
     
 def pushHeadClickedHandler():
-    subprocess.call(['tmux', 'send-keys', '-t', 'cemira:head', 'roslaunch head head.launch', 'Enter'])
+    subprocess.run(['tmux', 'send-keys', '-t', 'head', 'roslaunch cemira head.launch', 'Enter'])
 
 def pushArmClickedHandler():
-    subprocess.call(['tmux', 'send-keys', '-t', 'cemira:arm', 'roslaunch arm arm.launch', 'Enter'])
+    subprocess.run(['tmux', 'send-keys', '-t', 'arm', 'roslaunch cemira arm.launch', 'Enter'])
+
+def pushFaceOutputClickedHandler():
+    subprocess.run(['tmux', 'send-keys', '-t', 'faceOutput', 'roslaunch cemira face_output.launch', 'Enter'])
+
+def pushObjectClickedHandler():
+    subprocess.run(['tmux', 'send-keys', '-t', 'object', 'roslaunch cemira object_rec.launch', 'Enter'])
+
+def pushFaceInputClickedHandler():
+    subprocess.run(['tmux', 'send-keys', '-t', 'faceInput', 'roslaunch cemira face_output.launch', 'Enter'])
+
+def pushLeapClickedHandler():
+    subprocess.run(['tmux', 'send-keys', '-t', 'leap', 'roslaunch cemira leap.launch', 'Enter'])
 
 if __name__ == "__main__":
     import sys

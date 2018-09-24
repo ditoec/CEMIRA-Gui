@@ -36,14 +36,24 @@
         <x>20</x>
         <y>20</y>
         <width>501</width>
-        <height>251</height>
+        <height>451</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="3" column="0">
-        <widget class="QPushButton" name="pushArm">
+       <item row="6" column="0">
+        <widget class="QPushButton" name="pushFaceInput">
          <property name="text">
           <string>OFF</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLabel" name="labelObject_2">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="text">
+          <string>Launch Face Feature Rec. Nodes</string>
          </property>
         </widget>
        </item>
@@ -57,8 +67,8 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="pushHead">
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushArm">
          <property name="text">
           <string>OFF</string>
          </property>
@@ -74,20 +84,61 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <widget class="QPushButton" name="pushObject">
          <property name="text">
           <string>OFF</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="5" column="1">
         <widget class="QLabel" name="labelObject">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
          <property name="text">
           <string>Launch Object Recognition Nodes</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushHead">
+         <property name="text">
+          <string>OFF</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="labelFaceOutput">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="text">
+          <string>Launch Face &amp; Speech Output Nodes</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushFaceOutput">
+         <property name="text">
+          <string>OFF</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QPushButton" name="pushLeap">
+         <property name="text">
+          <string>OFF</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QLabel" name="labelLeap">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="text">
+          <string>Launch Leap Gesture Rec. Nodes</string>
          </property>
         </widget>
        </item>
@@ -112,6 +163,26 @@
     <widget class="QWidget" name="tabArm">
      <attribute name="title">
       <string>Arm</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tabFaceOutput">
+     <attribute name="title">
+      <string>Face Output</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tabObject">
+     <attribute name="title">
+      <string>Object Rec.</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tabFaceInput">
+     <attribute name="title">
+      <string>Face Input</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tabLeap">
+     <attribute name="title">
+      <string>Leap</string>
      </attribute>
     </widget>
    </widget>
